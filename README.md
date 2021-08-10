@@ -5,9 +5,13 @@ I have used Pygame to implement a way for user to draw their number and the mode
 
 # Requirements 
 Python 3.9 or below
+
 Pygame
+
 Tensorflow
+
 Numpy (only if you want to view the dataset images)
+
 Matplotlib (only if you want to view the dataset images)
 
 # Additional Notes
