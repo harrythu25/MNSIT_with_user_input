@@ -16,3 +16,7 @@ Matplotlib (only if you want to view the dataset images)
 
 # Additional Notes
 The 28x28 from user input isnt exactly like the training data set so i suggest trying to play around with your handwriting, size, etc and find one that the model recognizes best.
+
+# Google Colab Notebook of Model
+A neater way to view my model compared to the py file 
+https://colab.research.google.com/drive/1vYloi8O5TxFlN_PoxUaPQDRVaa8HMNqj?usp=sharing
