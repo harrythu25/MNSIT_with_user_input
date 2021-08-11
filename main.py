@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow_datasets as tfds
-from pathfinding.core.grid import Grid
+
 import warnings
 warnings.filterwarnings('ignore')
 
