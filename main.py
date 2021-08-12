@@ -4,53 +4,34 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow_datasets as tfds
 
-import warnings
-warnings.filterwarnings('ignore')
-
-
-
 WIDTH = 840
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
-pygame.display.set_caption("MY FIFRST TRY")
+pygame.display.set_caption("Handwritten Number Recognition")
 pygame.mixer.init()
 
 BG = (235, 240, 242)
-#BARRIER = (217, 163, 132)
-BARRIER = (0,0,0)
+NUMBER = (0, 0, 0)
 GREY = (128, 128, 128)
 
 
-class Node:
+class Pixel:
     def __init__(self, row, col, width, total_rows):
         self.row = row
         self.col = col
         self.x = row*width
         self.y = col*width
         self.color = BG
-        self.neighbors = []
         self.width = width
         self.total_rows = total_rows
 
     def get_pos(self):
         return self.row, self.col
 
-    def is_barrier(self):
-        return self.color == BARRIER
-
     def reset(self):
         self.color = BG
 
-
-
-    def make_barrier(self):
-        self.color = BARRIER
-
-
-
-
-
-
-
+    def make_pixel(self):
+        self.color = NUMBER
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
@@ -64,8 +45,8 @@ def make_grid(rows, width):
     for i in range(rows):
         grid.append([])
         for j in range (rows):
-            node = Node(i,j, gap, rows)
-            grid[i].append(node)
+            pixel = Pixel(i, j, gap, rows)
+            grid[i].append(pixel)
 
     return grid
 
@@ -78,7 +59,6 @@ def draw_grid(win, rows, width):
 
 def draw (win, grid, rows, width):
     win.fill(BG)
-
     for row in grid:
         for spot in row:
             spot.draw(win)
@@ -94,6 +74,7 @@ def get_clicked_pos(pos, rows, width):
     col = x//gap
 
     return row, col
+
 def guess(drawn):
     model = tf.keras.models.load_model('model1.model')
     mnist = tf.keras.datasets.mnist
@@ -104,8 +85,6 @@ def guess(drawn):
 
     print("I predict this number is a:", predictions)
 
-    #plt.imshow(li[0], cmap=plt.cm.binary)
-    #plt.show()
 
 def main(win, width):
     ROWS = 28
@@ -114,11 +93,7 @@ def main(win, width):
     run = True
     started = False
 
-
     arr = [[0 for i in range(ROWS)] for j in range(ROWS)]
-
-
-
     while run:
         draw(win, grid, ROWS, width)
 
@@ -134,8 +109,8 @@ def main(win, width):
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
-                spot.make_barrier()
-                arr[col][row] = 255
+                spot.make_pixel()
+                arr[col][row] = 1
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -143,10 +118,6 @@ def main(win, width):
                   guess(arr)
 
                 if event.key == pygame.K_c:
-
-
-                    start = None
-                    end = None
                     grid = make_grid(ROWS, width)
                     arr = [[0 for i in range(ROWS)] for j in range(ROWS)]
 
