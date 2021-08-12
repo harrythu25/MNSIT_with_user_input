@@ -1,6 +1,6 @@
 # MNSIT Deep Neural Network with Model Implementation
 
-From the popular MNSIT data set, I created a model with roughly 97.9% validation accuracy  and 97.4% accuracy with the testing data set. 
+From the popular MNSIT data set, I created a model with roughly 98.03% validation accuracy  and 97.4% accuracy with the testing data set. 
 I have used Pygame to implement a way for user to draw their number and the model has been implemented to recognize the user input and predict the number. 
 
 # Requirements 
